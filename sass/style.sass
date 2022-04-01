@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300&display=swap")
+
+//Variables
+@import 'variables'
+
+//mixins
+@import 'mixins'
+
+/* general */
+*
+    box-sizing: border-box
+
+body
+    margin: 10px 0 0 0
+
+h1
+    font:
+        size: 3.5vw
+        weight: 300
+        family: "Lato"
+    color: $font-color
+
+/* strips */
+.strips 
+    height: 100vh
+    width: 100vw
+    overflow: hidden
+    text-align: center
+    display: flex
+    cursor: pointer
+
+    .strip 
+        position: relative
+        width: 19.9vw
+        margin: 0.1vw
+        height: 100vh
+        display: flex
+        text-align: center
+        overflow: hidden
+        align-items: center
+        justify-content: center
+
+        .strip_content 
+            display: flex
+            align-items: center
+            justify-content: center
+            position: absolute
+            height: 100vh
+            width: 100%
+            text-align: center
+
+
+/* before */
+.strips 
+    .strip_content
+        &:before 
+            content: ""
+            display: flex
+            align-items: center
+            justify-content: center
+            position: absolute
+            z-index: 1
+            top: 0
+            left: 0
+            width: 20vw
+            height: 100vh
+            background: white
+            opacity: 0.05
+            -webkit-transform-origin: center center
+            transform-origin: center center
+            -webkit-transform: skew(30deg) scaleY(1) translate(0, 0)
+            transform: skew(30deg) scaleY(1) translate(0, 0)
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1)
+            overflow: hidden
+        &:hover
+            &:before 
+                -webkit-transform: skew(0deg) scaleX(2) translate(0, 0)
+                transform: skew(0deg) scaleX(2) translate(0, 0)
+                opacity: 0.2
+
+
+/* strips 1-5: nth-child 1-5 */
+@for $i from 1 through 5
+    .strip
+        &:nth-child(#{$i}) 
+            .strip_content
+                @include animations(nth($strip-bgcolor, $i), nth($strip-name, $i), nth($strip-time, $i), ease-out)
+                @keyframes #{nth($strip-name, $i)}
+                    from 
+                        transform: translate3d(nth($strip-3dx, $i), nth($strip-3dy, $i), nth($strip-3dz, $i))
+
+  
+
+
+/*# sourceMappingURL=style.css.map */
+
+
+
+
+
+
